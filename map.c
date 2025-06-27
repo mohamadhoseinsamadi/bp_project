@@ -15,9 +15,7 @@ void clear_map() {
             sprintf(map[i][j].symbol," .  ");
         }
     }
-    // TODO: Complete the loop to iterate over the entire map grid.
-// For each cell, reset the symbol to " .  " to represent an empty cell.
-// Hint: Use two nested loops to cover all rows and columns.
+    
 
 }
 
@@ -29,10 +27,7 @@ void render_map() {
         }
         printf("\n");
     }
-    // TODO: Implement the logic to print the entire map.
-// Hint: Use two nested loops to print each cell's symbol followed by a space.
-// Don't forget to print a newline after each row and draw borders if necessary.
-
+    
 }
 
 void place_departments() {
@@ -52,11 +47,7 @@ void place_incidents() {
             sprintf( map[incidents[i].y][incidents[i].x].symbol, "!%c%c!" , type, priority );
         }
     }
-    // TODO: Implement this function to place incidents on the map.
-// Only incidents that are not finished should be placed.
-// Determine the correct symbol based on incident type and priority.
-// Hint: Use sprintf to format the symbol string and assign it to the correct map cell.
-
+ 
 }
 
 void place_units() {
@@ -81,8 +72,5 @@ void update_and_render() {
     place_incidents();
     place_units();
     render_map();
-    // TODO: Determine the correct order of rendering the map.
-// Call functions to clear the map, place departments, incidents, and units.
-// Finally, call the function that renders the map to the console.
-
+   
 }
