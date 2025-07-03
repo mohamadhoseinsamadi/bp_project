@@ -31,6 +31,10 @@ void load_configuration(const char *filename) {
                 departments[department_count].units[i].departmentNumber=departments[department_count].number;
                 departments[department_count].units[i].unitNumber=i+1;
                 departments[department_count].units[i].state=UNIT_WAITING;
+                departments[department_count].units[i].target_x=departments[department_count].x;
+                departments[department_count].units[i].target_y=departments[department_count].y;
+                departments[department_count].units[i].first_x=departments[department_count].x;
+                departments[department_count].units[i].first_y=departments[department_count].y;
             }
             department_count++;
         }
@@ -46,6 +50,10 @@ void load_configuration(const char *filename) {
                 departments[department_count].units[i].departmentNumber=departments[department_count].number;
                 departments[department_count].units[i].unitNumber=i+1;
                 departments[department_count].units[i].state=UNIT_WAITING;
+                departments[department_count].units[i].target_x=departments[department_count].x;
+                departments[department_count].units[i].target_y=departments[department_count].y;
+                departments[department_count].units[i].first_x=departments[department_count].x;
+                departments[department_count].units[i].first_y=departments[department_count].y;
             }
             department_count++;
         }
@@ -61,6 +69,10 @@ void load_configuration(const char *filename) {
                 departments[department_count].units[i].departmentNumber=departments[department_count].number;
                 departments[department_count].units[i].unitNumber=i+1;
                 departments[department_count].units[i].state=UNIT_WAITING;
+                departments[department_count].units[i].target_x=departments[department_count].x;
+                departments[department_count].units[i].target_y=departments[department_count].y;
+                departments[department_count].units[i].first_x=departments[department_count].x;
+                departments[department_count].units[i].first_y=departments[department_count].y;
             }
             department_count++;
         }
