@@ -11,6 +11,7 @@ typedef struct {
     int departmentNumber;
     int unitNumber;
     UnitState state;
+    int first_x,first_y;
 } Unit;
 
 typedef struct {
