@@ -36,7 +36,9 @@ void dispatch_units() {
         int t=(type==FIRE)?0:(type==MEDICAL)?1:2;
         int p=(priority==LOW)?0:(priority==MEDIUM)?1:2;
         IncidentRequirements needed=Incident_Requirement[t][p];
-
+        if(Inc->state==INCIDENT_FINISHED){
+            continue;
+        }
         if(Inc->dispatched_count[0] < needed.fire_unit_needed){
             //sorting ...
             int depfiresize=0;
@@ -182,6 +184,84 @@ void dispatch_units() {
 }
 
 void update_incidents() {
+    //start
+    for(int i=0;i<incident_count;i++){
+        Incident *Inc=&incidents[i];
+        IncidentType type=Inc->type;
+        Priority priority=Inc->priority;
+        int t=(type==FIRE)?0:(type==MEDICAL)?1:2;
+        int p=(priority==LOW)?0:(priority==MEDIUM)?1:2;
+        IncidentRequirements needed=Incident_Requirement[t][p];
+        if(Inc->state==INCIDENT_FINISHED){
+            continue;
+        }
+        if(Inc->state==INCIDENT_OPERATION){
+            Inc->operation_turns_remaining--;
+            if(Inc->operation_turns_remaining==0){
+                Inc->state=INCIDENT_FINISHED;
+                for(int f=0;f<Inc->dispatched_count[0];f++){
+                     Unit *u = &Inc->dispatched_units[0][f];
+                     u->target_x=u->first_x;
+                     u->target_y=u->first_y;
+                     u->state=UNIT_RETURNING;
+                     Inc->dispatched_units[0][f]=NULL;
+                }
+                Inc->dispatched_count[0]=0;
+                for(int m=0;m<Inc->dispatched_count[1];m++){
+                     Unit *u = &Inc->dispatched_units[1][m];
+                     u->target_x=u->first_x;
+                     u->target_y=u->first_y;
+                     u->state=UNIT_RETURNING;
+                     Inc->dispatched_units[1][m]=NULL;
+                }
+                Inc->dispatched_count[1]=0;
+                for(int p=0;p<Inc->dispatched_count[2];p++){
+                     Unit *u = &Inc->dispatched_units[2][p];
+                     u->target_x=u->first_x;
+                     u->target_y=u->first_y;
+                     u->state=UNIT_RETURNING;
+                     Inc->dispatched_units[2][p]=NULL;
+                }
+                Inc->dispatched_count[2]=0;
+            }
+        }
+        if(Inc->state==INCIDENT_WAITING){
+            if( (Inc->dispatched_count[0] == needed.fire_unit_needed)&&(Inc->dispatched_count[1] == needed.medical_unit_needed)&&(Inc->dispatched_count[2] == needed.police_unit_needed) ){
+                int allarive=1;
+                for(int f=0;f<Inc->dispatched_count[0];f++){
+                     Unit *u = &Inc->dispatched_units[0][f];
+                     if(u->state!=UNIT_OPERATING){
+                        allarive=0;
+                        break;
+                     }
+                }
+                for(int m=0;m<Inc->dispatched_count[1];m++){
+                     Unit *u = &Inc->dispatched_units[1][m];
+                     if(u->state!=UNIT_OPERATING){
+                        allarive=0;
+                        break;
+                     }
+                }
+                for(int p=0;p<Inc->dispatched_count[2];p++){
+                     Unit *u = &Inc->dispatched_units[2][p];
+                     if(u->state!=UNIT_OPERATING){
+                        allarive=0;
+                        break;
+                     }
+                }
+                if(allarive==1){
+                    Inc->state=INCIDENT_OPERATION;
+                    Inc->operation_turns_remaining=needed.required_time;
+                }
+            }
+        }
+
+
+        
+
+    }
+
+
 
 // TODO: Implement logic for updating incidents over time.
 // For each incident, check if all required units have arrived at the location.
