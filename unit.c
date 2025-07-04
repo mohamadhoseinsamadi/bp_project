@@ -35,20 +35,20 @@ void update_units_movement() {
         for (int j = 0; j < departments[i].unit_count; j++) {
             Unit *u = &departments[i].units[j];
             if(u->state==UNIT_DISPATCHED){
-                move_unit_one_step(&u);
+                move_unit_one_step(u);
                 if(u->target_x==u->x&&u->target_y==u->y){
                     u->state=UNIT_OPERATING;
-                    log_unit_state_change(&u,UNIT_OPERATING);
+                    log_unit_state_change(u,UNIT_OPERATING);
                 }
             }
             else if(u->state==UNIT_RETURNING){
-                move_unit_one_step(&u);
+                move_unit_one_step(u);
                 if(u->target_x==u->x&&u->target_y==u->y){
                     u->state=UNIT_WAITING;
-                    log_unit_state_change(&u,UNIT_WAITING);
+                    log_unit_state_change(u,UNIT_WAITING);
                 }
             }
-            
+
         }
     }
     // TODO: Iterate through all departments and units.
