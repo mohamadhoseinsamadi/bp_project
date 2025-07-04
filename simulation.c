@@ -8,12 +8,12 @@
 #include "utils.h"
 #include <stdio.h>
 #include <string.h>
-int exit=0;
+int ex=0;
 void simulation_loop(){
     int turn=0;
     init_log();
     log_simulation_start();
-    while (!exit){
+    while (!ex){
         if(turn%10==0){
             process_user_input();
         }
@@ -59,7 +59,7 @@ void process_user_input(){
     }   
         break;
     case 3:{
-        exit=1;
+        ex=1;
         return;
     }   
         break;
