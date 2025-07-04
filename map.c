@@ -7,6 +7,8 @@
 #include <string.h>
 
 MapCell map[MAP_MAX_HEIGHT][MAP_MAX_WIDTH];
+int map_width = 20; 
+int map_height = 10;
 void clear_map() {
     //start:
     for(int i=0;i<map_height;i++){

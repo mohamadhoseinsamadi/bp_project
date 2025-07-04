@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "bit": "c",
+        "compare": "c",
+        "limits": "c",
+        "new": "c"
+    }
+}
