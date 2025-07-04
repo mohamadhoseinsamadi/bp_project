@@ -78,7 +78,7 @@ void dispatch_units() {
                         u->state=UNIT_DISPATCHED;
                         u->target_x=Inc->x;
                         u->target_y=Inc->y;
-                        log_unit_dispatched(&u,u->target_x,u->target_y);
+                        log_unit_dispatched(u,u->target_x,u->target_y);
                     }
                 }
                 
@@ -94,7 +94,7 @@ void dispatch_units() {
             }
             Department medical_dep[depmedicalsize];
             int index=0;
-            for(int d=0;i,department_count;d++){
+            for(int d=0;d<department_count;d++){
                 if(departments[d].type==MEDICAL){
                     medical_dep[index++]=departments[d];
                 }
@@ -123,7 +123,7 @@ void dispatch_units() {
                         u->state=UNIT_DISPATCHED;
                         u->target_x=Inc->x;
                         u->target_y=Inc->y;
-                        log_unit_dispatched(&u,u->target_x,u->target_y);
+                        log_unit_dispatched(u,u->target_x,u->target_y);
                     }
                 }
                 
@@ -139,7 +139,7 @@ void dispatch_units() {
             }
             Department police_dep[deppolicesize];
             int index=0;
-            for(int d=0;i,department_count;d++){
+            for(int d=0;d<department_count;d++){
                 if(departments[d].type==POLICE){
                     police_dep[index++]=departments[d];
                 }
@@ -168,7 +168,7 @@ void dispatch_units() {
                         u->state=UNIT_DISPATCHED;
                         u->target_x=Inc->x;
                         u->target_y=Inc->y;
-                        log_unit_dispatched(&u,u->target_x,u->target_y);
+                        log_unit_dispatched(u,u->target_x,u->target_y);
                     }
                 }
                 
@@ -204,30 +204,30 @@ void update_incidents() {
                 Inc->state=INCIDENT_FINISHED;
                 log_incident_finished(Inc->type,Inc->x,Inc->y);
                 for(int f=0;f<Inc->dispatched_count[0];f++){
-                     Unit *u = &Inc->dispatched_units[0][f];
+                     Unit *u = Inc->dispatched_units[0][f];
                      u->target_x=u->first_x;
                      u->target_y=u->first_y;
                      u->state=UNIT_RETURNING;
                      Inc->dispatched_units[0][f]=NULL;
-                     log_unit_returning(&u,u->first_x,u->first_y);
+                     log_unit_returning(u,u->first_x,u->first_y);
                 }
                 Inc->dispatched_count[0]=0;
                 for(int m=0;m<Inc->dispatched_count[1];m++){
-                     Unit *u = &Inc->dispatched_units[1][m];
+                     Unit *u = Inc->dispatched_units[1][m];
                      u->target_x=u->first_x;
                      u->target_y=u->first_y;
                      u->state=UNIT_RETURNING;
                      Inc->dispatched_units[1][m]=NULL;
-                     log_unit_returning(&u,u->first_x,u->first_y);
+                     log_unit_returning(u,u->first_x,u->first_y);
                 }
                 Inc->dispatched_count[1]=0;
                 for(int p=0;p<Inc->dispatched_count[2];p++){
-                     Unit *u = &Inc->dispatched_units[2][p];
+                     Unit *u = Inc->dispatched_units[2][p];
                      u->target_x=u->first_x;
                      u->target_y=u->first_y;
                      u->state=UNIT_RETURNING;
                      Inc->dispatched_units[2][p]=NULL;
-                     log_unit_returning(&u,u->first_x,u->first_y);
+                     log_unit_returning(u,u->first_x,u->first_y);
                 }
                 Inc->dispatched_count[2]=0;
             }
@@ -236,21 +236,21 @@ void update_incidents() {
             if( (Inc->dispatched_count[0] == needed.fire_unit_needed)&&(Inc->dispatched_count[1] == needed.medical_unit_needed)&&(Inc->dispatched_count[2] == needed.police_unit_needed) ){
                 int allarive=1;
                 for(int f=0;f<Inc->dispatched_count[0];f++){
-                     Unit *u = &Inc->dispatched_units[0][f];
+                     Unit *u = Inc->dispatched_units[0][f];
                      if(u->state!=UNIT_OPERATING){
                         allarive=0;
                         break;
                      }
                 }
                 for(int m=0;m<Inc->dispatched_count[1];m++){
-                     Unit *u = &Inc->dispatched_units[1][m];
+                     Unit *u = Inc->dispatched_units[1][m];
                      if(u->state!=UNIT_OPERATING){
                         allarive=0;
                         break;
                      }
                 }
                 for(int p=0;p<Inc->dispatched_count[2];p++){
-                     Unit *u = &Inc->dispatched_units[2][p];
+                     Unit *u = Inc->dispatched_units[2][p];
                      if(u->state!=UNIT_OPERATING){
                         allarive=0;
                         break;
