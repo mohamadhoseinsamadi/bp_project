@@ -7,7 +7,8 @@
 typedef struct {
     char symbol[5];
 } MapCell;
-
+extern int map_width;
+extern int map_height;
 extern MapCell map[MAP_MAX_HEIGHT][MAP_MAX_WIDTH];
 extern int map_width, map_height;
 
