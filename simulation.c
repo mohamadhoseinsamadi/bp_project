@@ -13,6 +13,7 @@ void simulation_loop(){
     int turn=0;
     init_log();
     log_simulation_start();
+    load_configuration("");
     while (!ex){
         if(turn%10==0){
             process_user_input();
