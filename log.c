@@ -63,15 +63,16 @@ void log_unit_dispatched(Unit *u, int target_x, int target_y){
 // Remember to flush the file after writing.
 
 
-void log_incident_finished(int x, int y) {
-    if (!log_file) return;
-    fprintf(log_file, "Incident Finished at Location=(%d,%d)\n", x, y);
+void log_incident_finished(IncidentType type,int x, int y){
+    if (!log_file)
+        return;
+    fprintf(log_file, "Incident %s Finished at Location=(%d,%d)\n",getIncidentTypeStr(type), x, y);
     fflush(log_file);
 }
 
 void log_unit_state_change(Unit *u, UnitState state) {
     if (!log_file) return;
-    fprintf(log_file, "Unit %d-%d changed state to %d\n",
+    fprintf(log_file, "Unit %d-%d changed state to %s\n",
             u->departmentNumber, u->unitNumber,getUnitStateStr(state) );
     fflush(log_file);
 }
@@ -90,8 +91,8 @@ void log_unit_returning(Unit *u, int base_x, int base_y) {
     fflush(log_file);
 }
 
-void log_incident_status_change(int x, int y, IncidentState state) {
+void log_incident_status_change(int x, int y, IncidentState state, IncidentType type){
     if (!log_file) return;
-    fprintf(log_file, "Incident at (%d,%d) changed state to %d\n", x, y,getIncidentStateStr(state) );
+    fprintf(log_file, "Incident %s at (%d,%d) changed state to %s\n",getIncidentTypeStr(type), x, y,getIncidentStateStr(state) );
     fflush(log_file);
 }
