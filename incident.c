@@ -78,6 +78,7 @@ void dispatch_units() {
                         u->state=UNIT_DISPATCHED;
                         u->target_x=Inc->x;
                         u->target_y=Inc->y;
+                        log_unit_dispatched(&u,u->target_x,u->target_y);
                     }
                 }
                 
@@ -122,6 +123,7 @@ void dispatch_units() {
                         u->state=UNIT_DISPATCHED;
                         u->target_x=Inc->x;
                         u->target_y=Inc->y;
+                        log_unit_dispatched(&u,u->target_x,u->target_y);
                     }
                 }
                 
@@ -166,6 +168,7 @@ void dispatch_units() {
                         u->state=UNIT_DISPATCHED;
                         u->target_x=Inc->x;
                         u->target_y=Inc->y;
+                        log_unit_dispatched(&u,u->target_x,u->target_y);
                     }
                 }
                 
@@ -199,12 +202,14 @@ void update_incidents() {
             Inc->operation_turns_remaining--;
             if(Inc->operation_turns_remaining==0){
                 Inc->state=INCIDENT_FINISHED;
+                log_incident_finished(Inc->type,Inc->x,Inc->y);
                 for(int f=0;f<Inc->dispatched_count[0];f++){
                      Unit *u = &Inc->dispatched_units[0][f];
                      u->target_x=u->first_x;
                      u->target_y=u->first_y;
                      u->state=UNIT_RETURNING;
                      Inc->dispatched_units[0][f]=NULL;
+                     log_unit_returning(&u,u->first_x,u->first_y);
                 }
                 Inc->dispatched_count[0]=0;
                 for(int m=0;m<Inc->dispatched_count[1];m++){
@@ -213,6 +218,7 @@ void update_incidents() {
                      u->target_y=u->first_y;
                      u->state=UNIT_RETURNING;
                      Inc->dispatched_units[1][m]=NULL;
+                     log_unit_returning(&u,u->first_x,u->first_y);
                 }
                 Inc->dispatched_count[1]=0;
                 for(int p=0;p<Inc->dispatched_count[2];p++){
@@ -221,6 +227,7 @@ void update_incidents() {
                      u->target_y=u->first_y;
                      u->state=UNIT_RETURNING;
                      Inc->dispatched_units[2][p]=NULL;
+                     log_unit_returning(&u,u->first_x,u->first_y);
                 }
                 Inc->dispatched_count[2]=0;
             }
@@ -252,6 +259,7 @@ void update_incidents() {
                 if(allarive==1){
                     Inc->state=INCIDENT_OPERATION;
                     Inc->operation_turns_remaining=needed.required_time;
+                    log_incident_status_change(Inc->x,Inc->y,Inc->state,Inc->type);
                 }
             }
         }

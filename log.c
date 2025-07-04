@@ -5,6 +5,7 @@
 #include <time.h>
 #include "common.h"
 #include "unit.h"
+#include "utils.h"
 
 FILE *log_file = NULL;
 
@@ -45,7 +46,7 @@ void log_simulation_end() {
 void log_incident_created(IncidentType type, Priority priority, int x, int y) {
     if (!log_file) 
         return;
-    fprintf(log_file, "New Incident Created: Type=%d, Priority=%d, Location=(%d,%d)\n", type, priority, x, y);
+    fprintf(log_file, "New Incident Created: Type=%s, Priority=%s, Location=(%d,%d)\n", getIncidentTypeStr(type), getPriorityStr(priority), x, y);
     fflush(log_file);
 }
 
@@ -53,7 +54,7 @@ void log_incident_created(IncidentType type, Priority priority, int x, int y) {
 void log_unit_dispatched(Unit *u, int target_x, int target_y){
     if (!log_file) 
         return;
-    fprintf(log_file, "Unit Dispatched: type=%d, Dept=%d, Unit=%d, Target=(%d,%d)\n",u->type,u->departmentNumber,u->unitNumber,u->target_x,u->target_y);
+    fprintf(log_file, "Unit Dispatched: type=%s, Dept=%d, Unit=%d, Target=(%d,%d)\n",getUnitTypeStr( u->type),u->departmentNumber,u->unitNumber,u->target_x,u->target_y);
     fflush(log_file);
 }
 
@@ -71,7 +72,7 @@ void log_incident_finished(int x, int y) {
 void log_unit_state_change(Unit *u, UnitState state) {
     if (!log_file) return;
     fprintf(log_file, "Unit %d-%d changed state to %d\n",
-            u->departmentNumber, u->unitNumber, state);
+            u->departmentNumber, u->unitNumber,getUnitStateStr(state) );
     fflush(log_file);
 }
 
@@ -91,6 +92,6 @@ void log_unit_returning(Unit *u, int base_x, int base_y) {
 
 void log_incident_status_change(int x, int y, IncidentState state) {
     if (!log_file) return;
-    fprintf(log_file, "Incident at (%d,%d) changed state to %d\n", x, y, state);
+    fprintf(log_file, "Incident at (%d,%d) changed state to %d\n", x, y,getIncidentStateStr(state) );
     fflush(log_file);
 }
