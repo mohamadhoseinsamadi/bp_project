@@ -25,6 +25,10 @@ typedef struct {
 extern Department departments[MAX_DEPARTMENTS];
 extern int department_count;
 
+//start
+int manhattan_distance(int x1, int y1, int x2, int y2);
+void move_unit_one_step(Unit *u) ;
+void update_units_movement() ;
 // TODO: Declare the required functions
 
 #endif // UNIT_H
