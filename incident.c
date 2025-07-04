@@ -49,7 +49,7 @@ void dispatch_units() {
             }
             Department fire_dep[depfiresize];
             int index=0;
-            for(int d=0;i,department_count;d++){
+            for(int d=0;d<department_count;d++){
                 if(departments[d].type==FIRE){
                     fire_dep[index++]=departments[d];
                 }
