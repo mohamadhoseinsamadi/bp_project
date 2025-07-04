@@ -8,6 +8,20 @@
 
 FILE *log_file = NULL;
 
+//start
+void init_log(){
+    time_t rawtime;
+    struct tm * timeinfo;
+    char filename[30];
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    strftime(filename, sizeof(filename), "log_%Y%m%d_%H%M%S.txt", timeinfo);
+    log_file = fopen(filename, "w");
+    if (!log_file) {
+        perror("error in opening file");
+        return ;
+    }
+}
 // TODO: Implement log initialization.
 // Create a log file with a timestamped filename using strftime.
 // Open the file in write mode and handle possible errors.
@@ -15,20 +29,31 @@ FILE *log_file = NULL;
 
 
 void log_simulation_start() {
-    if (!log_file) return;
-    // TODO: Write a simple message to the log indicating the simulation has started.
-    // Remember to flush the log_file after writing.
+    if (!log_file)
+        return;
+    fprintf(log_file,"Simulation Started\n");
+    fflush(log_file);
 }
 
 void log_simulation_end() {
-    if (!log_file) return;
-    // TODO: Write a simple message to the log indicating the simulation has ended.
-    // Remember to flush the log_file after writing.
+    if (!log_file) 
+        return;
+    fprintf(log_file,"Simulation Ended\n");
+    fflush(log_file);
 }
 
 void log_incident_created(IncidentType type, Priority priority, int x, int y) {
-    if (!log_file) return;
+    if (!log_file) 
+        return;
     fprintf(log_file, "New Incident Created: Type=%d, Priority=%d, Location=(%d,%d)\n", type, priority, x, y);
+    fflush(log_file);
+}
+
+//start
+void log_unit_dispatched(Unit *u, int target_x, int target_y){
+    if (!log_file) 
+        return;
+    fprintf(log_file, "Unit Dispatched: type=%d, Dept=%d, Unit=%d, Target=(%d,%d)\n",u->type,u->departmentNumber,u->unitNumber,u->target_x,u->target_y);
     fflush(log_file);
 }
 
