@@ -22,7 +22,18 @@ void clear_map() {
 void render_map() {
     for(int i=0;i<map_height;i++){
         for(int j=0;j<map_width;j++){
-            printf("%s",map[i][j].symbol);
+            if (map[i][j].symbol[1] == 'F') {
+                printf("\033[31m%s\033[0m", map[i][j].symbol);
+            } 
+            else if (map[i][j].symbol[1] == 'P') {
+                printf("\033[32m%s\033[0m", map[i][j].symbol);
+            }
+            else if (map[i][j].symbol[1] == 'M'){
+                printf("\033[34m%s\033[0m", map[i][j].symbol);
+            }
+            else{
+                printf("%s",map[i][j].symbol);
+            }
         }
         printf("\n");
     }
@@ -63,7 +74,7 @@ void place_units() {
 }
 
 void update_and_render() {
-    
+
     clear_map();
     place_departments();
     place_incidents();
