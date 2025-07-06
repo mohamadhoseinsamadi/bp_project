@@ -8,8 +8,12 @@
 #include <string.h>
 
 Incident *incidents = NULL;
+int* create_time = NULL;
+int* finish_time = NULL;
 int incident_count = 0;
 int incident_capacity = 0;
+int turn;
+int solved;
 
 IncidentRequirements Incident_Requirement[3][3] =  { { {1,0,0,3}, {1,1,0,6}, {1,1,1,8} },
                                                      { {0,1,0,1} ,{0,1,0,3} ,{0,1,0,5} },

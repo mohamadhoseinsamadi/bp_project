@@ -44,7 +44,7 @@ void update_units_movement() {
                     u->state=UNIT_OPERATING;
                     log_unit_state_change(u,UNIT_OPERATING);
                 }
-            }
+            } 
             else if(u->state==UNIT_RETURNING){
                 move_unit_one_step(u);
                 if(u->target_x==u->x&&u->target_y==u->y){

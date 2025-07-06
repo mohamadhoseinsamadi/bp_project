@@ -7,4 +7,14 @@ POLICE Unit 1-1 changed state to OPERATING
 FIRE Unit 1-1 changed state to OPERATING
 MEDICAL Unit 1-1 changed state to OPERATING
 Incident FIRE at (0,0) changed state to OPERATION
+Incident FIRE Finished at Location=(0,0)
+FIRE Unit 1-1 returning to base (2,8)
+MEDICAL Unit 1-1 returning to base (5,5)
+POLICE Unit 1-1 returning to base (8,1)
+POLICE Unit 1-1 changed state to UNKNOWN
+FIRE Unit 1-1 changed state to UNKNOWN
+MEDICAL Unit 1-1 changed state to UNKNOWN
+POLICE Unit 1-1 changed state to WAITING
+FIRE Unit 1-1 changed state to WAITING
+MEDICAL Unit 1-1 changed state to WAITING
 Simulation Ended

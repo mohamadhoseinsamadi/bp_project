@@ -5,7 +5,8 @@
 #include "common.h"
 #include "unit.h"
 #include "stdlib.h"
-
+extern int* create_time;
+extern int* finish_time;
 typedef struct {
     int x, y;
     IncidentType type;
