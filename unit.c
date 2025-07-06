@@ -1,7 +1,8 @@
-
+#include "incident.h"
 #include "unit.h"
 #include "map.h"
 #include "log.h"
+#include "utils.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -13,20 +14,23 @@ int manhattan_distance(int x1, int y1, int x2, int y2) {
 }
 
 void move_unit_one_step(Unit *u) {
-    // Just for debugging purposes. Remove after complete implementation.
-    printf("Moving Unit %d-%d\n", u->departmentNumber, u->unitNumber);
-
-    //start
     if( abs(u->target_x - u->x)>0 ){
-        ( u->target_x - u->x ) >0 ? u->x++ : u->x--;
+        if(( u->target_x - u->x ) >0) {
+            u->x++;
+        }
+        else {
+            u->x--;
+        }
     }
     else if( abs(u->target_y - u->y)>0 ){
-        ( u->target_y - u->y ) >0 ? u->y++ : u->y--;
+        if(( u->target_y - u->y ) >0 ){
+            u->y++ ;
+        }
+        else {
+            u->y--;
+        }
     }
-    // TODO: Implement logic to move the unit one step toward its target.
-    // Only move along one axis per function call. Prioritize X direction.
-    // Hint: Use simple conditionals to decide whether to increment or decrement X or Y.
-
+  
 }
 
 void update_units_movement() {
@@ -51,9 +55,5 @@ void update_units_movement() {
 
         }
     }
-    // TODO: Iterate through all departments and units.
-    // For each unit in DISPATCHED or RETURNING state, move it one step toward its target.
-    // If the unit reaches its target, update its state accordingly.
-    // Don't forget to log the state changes using the appropriate logging function.
 
 }

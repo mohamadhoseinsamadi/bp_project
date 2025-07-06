@@ -13,24 +13,35 @@ void simulation_loop(){
     int turn=0;
     init_log();
     log_simulation_start();
-    load_configuration("");
+    load_configuration("C:\\Users\\Padidar\\CLionProjects\\untitled5\\sample_config.txt");
     while (!ex){
         if(turn%10==0){
             process_user_input();
         }
+        if(ex==1){
+            log_simulation_end();
+            break;
+        }
+        printf("===City Map===\n");
         perform_turn_actions();
         turn++;
+        printf("===============\n");
+        printf(" ...Turn %d...\n",turn);
+        if(turn%10!=0) {
+            printf("Press Enter to continue...\n");
+            fflush(stdin);
+            getchar();
+        }
+
     }
-    
+
 }
 void process_user_input(){
     printf("1. Enter a new incident\n2. Continue simulation\n3. Exit\n");
     printf("Enter your choice: ");
     int choice;
     scanf("%d",&choice);
-    switch (choice)
-    {
-    case 1:{
+    while (choice==1){
         printf("Enter type (FIRE , MEDICAL , CRIME) :");
         char type[10];
         scanf("%s",type);
@@ -46,26 +57,23 @@ void process_user_input(){
         inc.type=parse_department_type(type);
         inc.state=INCIDENT_WAITING;
         inc.priority=parse_priority(priority);
-        inc.dispatched_count[0]=0;        
+        inc.dispatched_count[0]=0;
         inc.dispatched_count[1]=0;
         inc.dispatched_count[2]=0;
         log_incident_created(inc.type,inc.priority,inc.x,inc.y);
         ensure_incident_capacity();
         incidents[incident_count]=inc;
         incident_count++;
+        printf("1. Enter a new incident\n2. Continue simulation\n3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d",&choice);
     }
-        break;
-    case 2:{
+    if(choice==2) {
         return;
-    }   
-        break;
-    case 3:{
+    }
+    else if(choice==3){
         ex=1;
         return;
-    }   
-        break;
-    default:
-        break;
     }
 }
 void perform_turn_actions(){

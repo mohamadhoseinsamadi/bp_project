@@ -10,7 +10,6 @@ MapCell map[MAP_MAX_HEIGHT][MAP_MAX_WIDTH];
 int map_width = 20; 
 int map_height = 10;
 void clear_map() {
-    //start:
     for(int i=0;i<map_height;i++){
         for(int j=0 ; j<map_width;j++){
             sprintf(map[i][j].symbol," .  ");
@@ -21,7 +20,6 @@ void clear_map() {
 }
 
 void render_map() {
-    //start
     for(int i=0;i<map_height;i++){
         for(int j=0;j<map_width;j++){
             printf("%s",map[i][j].symbol);
@@ -40,7 +38,6 @@ void place_departments() {
 }
 
 void place_incidents() {
-    //start
     for(int i=0 ; i< incident_count ; i++){
         if(incidents[i].state!=INCIDENT_FINISHED){
             char type= (incidents[i].type == FIRE) ? 'F' : (incidents[i].type == MEDICAL) ? 'M' : 'P';
@@ -66,8 +63,7 @@ void place_units() {
 }
 
 void update_and_render() {
-
-    //start
+    
     clear_map();
     place_departments();
     place_incidents();

@@ -18,7 +18,6 @@ void load_configuration(const char *filename) {
         if (strncmp(line, "MAP_SIZE", 8) == 0) {
             sscanf(line, "MAP_SIZE %d %d", &map_width, &map_height);
         }
-        //////start:
         else if( strncmp(line, "DEPARTMENT FIRE", 15) == 0){
             sscanf(line , "DEPARTMENT FIRE %d %d %d %d",
                    &departments[department_count].number,&departments[department_count].x,
