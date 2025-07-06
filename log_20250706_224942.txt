@@ -1,0 +1,20 @@
+Simulation Started
+New Incident Created: Type=POLICE, Priority=LOW, Location=(0,0)
+New Incident Created: Type=FIRE, Priority=HIGH, Location=(0,1)
+New Incident Created: Type=MEDICAL, Priority=MEDIUM, Location=(5,0)
+Unit Dispatched: type=POLICE, Dept=1, Unit=1, Target=(0,0)
+Unit Dispatched: type=FIRE, Dept=1, Unit=1, Target=(0,1)
+Unit Dispatched: type=MEDICAL, Dept=1, Unit=1, Target=(0,1)
+Unit Dispatched: type=POLICE, Dept=1, Unit=2, Target=(0,1)
+Unit Dispatched: type=MEDICAL, Dept=1, Unit=2, Target=(5,0)
+MEDICAL Unit 1-2 changed state to OPERATING
+Incident MEDICAL at (5,0) changed state to OPERATION
+POLICE Unit 1-2 changed state to OPERATING
+Incident MEDICAL Finished at Location=(5,0)
+MEDICAL Unit 1-2 returning to base (5,5)
+FIRE Unit 1-1 changed state to OPERATING
+MEDICAL Unit 1-1 changed state to OPERATING
+POLICE Unit 1-1 changed state to OPERATING
+Incident POLICE at (0,0) changed state to OPERATION
+Incident FIRE at (0,1) changed state to OPERATION
+Simulation Ended

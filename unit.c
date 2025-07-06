@@ -48,6 +48,14 @@ void update_units_movement() {
             else if(u->state==UNIT_RETURNING){
                 move_unit_one_step(u);
                 if(u->target_x==u->x&&u->target_y==u->y){
+                    u->state=UNIT_TIRED;
+                    u->tired_time=2;
+                    log_unit_state_change(u,UNIT_TIRED);
+                }
+            }
+            else if(u->state==UNIT_TIRED){
+                u->tired_time--;
+                if(u->tired_time==0){
                     u->state=UNIT_WAITING;
                     log_unit_state_change(u,UNIT_WAITING);
                 }

@@ -1,0 +1,10 @@
+Simulation Started
+New Incident Created: Type=FIRE, Priority=HIGH, Location=(10,7)
+Unit Dispatched: type=FIRE, Dept=2, Unit=1, Target=(10,7)
+Unit Dispatched: type=MEDICAL, Dept=2, Unit=1, Target=(10,7)
+Unit Dispatched: type=POLICE, Dept=1, Unit=1, Target=(10,7)
+MEDICAL Unit 2-1 changed state to OPERATING
+FIRE Unit 2-1 changed state to OPERATING
+POLICE Unit 1-1 changed state to OPERATING
+Incident FIRE at (10,7) changed state to OPERATION
+Simulation Ended

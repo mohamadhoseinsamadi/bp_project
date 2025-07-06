@@ -4,6 +4,7 @@
 #include "unit.h"
 #include "map.h"
 #include <stdio.h>
+#include "simulation.h"
 #include <string.h>
 
 Incident *incidents = NULL;
@@ -184,6 +185,8 @@ void update_incidents() {
             Inc->operation_turns_remaining--;
             if(Inc->operation_turns_remaining==0){
                 Inc->state=INCIDENT_FINISHED;
+                finish_time[i]=turn;
+                solved++;
                 log_incident_finished(Inc->type,Inc->x,Inc->y);
                 for(int f=0;f<Inc->dispatched_count[0];f++){
                     Unit *u = Inc->dispatched_units[0][f];
@@ -255,10 +258,14 @@ void ensure_incident_capacity() {
         if(incident_capacity==0){
             incident_capacity=1;
             incidents =(Incident *)malloc(1*sizeof(Incident));
+            create_time=(int*)malloc(1*sizeof(int));
+            finish_time=(int*)malloc(1*sizeof(int));
         }
         else{
             incident_capacity*=2;
             incidents =(Incident *)realloc(incidents,incident_capacity*sizeof(Incident));
+            create_time=(int*)realloc(create_time,incident_capacity*sizeof(int));
+            finish_time=(int*)realloc(finish_time,incident_capacity*sizeof(int));
         }
     }
    
