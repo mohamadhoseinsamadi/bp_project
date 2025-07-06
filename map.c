@@ -22,14 +22,29 @@ void clear_map() {
 void render_map() {
     for(int i=0;i<map_height;i++){
         for(int j=0;j<map_width;j++){
-            if (map[i][j].symbol[1] == 'F') {
-                printf("\033[31m%s\033[0m", map[i][j].symbol);
+            if (map[i][j].symbol[1] == 'F'||map[i][j].symbol[0] == 'F') {
+                if(map[i][j].symbol[2] == 'H'||map[i][j].symbol[2] == 'M'||map[i][j].symbol[2] == 'L'){
+                    printf("\033[31m%s\033[0m", map[i][j].symbol);//قرمز
+                }
+                else{
+                    printf("\033[33m%s\033[0m", map[i][j].symbol);//زرد
+                }
             } 
-            else if (map[i][j].symbol[1] == 'P') {
-                printf("\033[32m%s\033[0m", map[i][j].symbol);
+            else if (map[i][j].symbol[1] == 'P'||map[i][j].symbol[0] == 'P') {
+                if(map[i][j].symbol[2] == 'H'||map[i][j].symbol[2] == 'M'||map[i][j].symbol[2] == 'L'){
+                    printf("\033[94m%s\033[0m", map[i][j].symbol);//آبی پررنگ
+                }
+                else{
+                    printf("\033[34m%s\033[0m", map[i][j].symbol);//آبی کمرنگ
+                }
             }
-            else if (map[i][j].symbol[1] == 'M'){
-                printf("\033[34m%s\033[0m", map[i][j].symbol);
+            else if (map[i][j].symbol[1] == 'M'||map[i][j].symbol[0] == 'M'){
+                if(map[i][j].symbol[2] == 'H'||map[i][j].symbol[2] == 'M'||map[i][j].symbol[2] == 'L'){
+                    printf("\033[92m%s\033[0m", map[i][j].symbol);//سبز پررنگ
+                }
+                else{
+                    printf("\033[32m%s\033[0m", map[i][j].symbol);//سبزکمرنگ
+                }
             }
             else{
                 printf("%s",map[i][j].symbol);
