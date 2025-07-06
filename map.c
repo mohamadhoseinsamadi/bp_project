@@ -20,8 +20,15 @@ void clear_map() {
 }
 
 void render_map() {
+    for(int i=0;i<map_width;i++){
+        printf("\033[95m____\033[0m");
+    }
+    printf("\n");
     for(int i=0;i<map_height;i++){
         for(int j=0;j<map_width;j++){
+            if( j==0 ){
+                printf("\033[95m|\033[0m");
+            }
             if (map[i][j].symbol[1] == 'F'||map[i][j].symbol[0] == 'F') {
                 if(map[i][j].symbol[2] == 'H'||map[i][j].symbol[2] == 'M'||map[i][j].symbol[2] == 'L'){
                     printf("\033[31m%s\033[0m", map[i][j].symbol);//قرمز
@@ -49,9 +56,17 @@ void render_map() {
             else{
                 printf("%s",map[i][j].symbol);
             }
+
+            if( (j==map_width-1) ){
+                printf("\033[95m|\033[0m");
+            }
         }
         printf("\n");
     }
+    for(int i=0;i<map_width;i++){
+        printf("\033[95m____\033[0m");
+    }
+    printf("\n");
     
 }
 
