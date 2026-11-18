@@ -1,0 +1,15 @@
+# Build output
+simulation
+simulation.exe
+*.o
+
+# Runtime logs
+log_*.txt
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -13,7 +13,7 @@ int ex=0;
 void simulation_loop(){
     init_log();
     log_simulation_start();
-    load_configuration("C:\\Users\\Padidar\\CLionProjects\\untitled5\\sample_config.txt");
+    load_configuration("sample_config.txt");
     while (!ex){
         if(turn%10==0){
             process_user_input();

@@ -7,7 +7,7 @@
 #include <string.h>
 
 void load_configuration(const char *filename) {
-    FILE *file = fopen("C:\\Users\\Padidar\\Desktop\\basic\\basic\\sample_config.txt", "r");
+    FILE *file = fopen(filename, "r");
     if (!file) {
         printf("Failed to open configuration file.\n");
         exit(1);
